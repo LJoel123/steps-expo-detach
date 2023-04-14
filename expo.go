@@ -72,6 +72,21 @@ func (e Expo) eject() error {
 	return cmd.Run()
 }
 
+// Prebuild command creates Xcode and Android Studio projects for your app.
+func (e Expo) prebuild() error {
+	args := []string{"expo", "prebuild"}
+
+	cmd := command.New("npx", args...)
+	cmd.SetStdout(os.Stdout)
+	cmd.SetStderr(os.Stderr)
+	if e.Workdir != "" {
+		cmd.SetDir(e.Workdir)
+	}
+
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	return cmd.Run()
+}
+
 func (e Expo) publish() error {
 	args := []string{"publish", "--non-interactive"}
 

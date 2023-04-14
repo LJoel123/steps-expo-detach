@@ -118,17 +118,17 @@ func main() {
 
 func detach(e Expo, cfg Config) error {
 	//
-	// Eject project via the Expo CLI
+	// Prebuild Expo project to generate the native project
 	fmt.Println()
-	log.Infof("Eject project")
+	log.Infof("Prebuild Expo project")
 	{
-		if err := e.eject(); err != nil {
-			return fmt.Errorf("Failed to eject project: %s", err)
+		if err := e.prebuild(); err != nil {
+			return fmt.Errorf("Failed to prebuild project: %s", err)
 		}
 	}
 
 	fmt.Println()
-	log.Donef("Successfully ejected your project")
+	log.Donef("Successfully prebuild your project")
 
 	if cfg.RunPublish == "yes" {
 		if err := runPublish(e, cfg); err != nil {
